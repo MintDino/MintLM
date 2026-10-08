@@ -49,7 +49,7 @@ python inference/chat.py --adapter outputs/mintlm-qwen3-8b
 - [x] Chat dataset format
 - [x] Local inference
 - [ ] Large curated dataset
-- [ ] Automated evaluation
+- [x] Automated evaluation
 - [ ] Preference tuning
 - [ ] GGUF export
 - [ ] Hugging Face release
