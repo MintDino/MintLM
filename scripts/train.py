@@ -8,8 +8,8 @@ from trl import SFTConfig, SFTTrainer
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--config", default="configs/qwen3-8b-qlora.yaml")
-    parser.add_argument("--train-file", default="data/train.jsonl")
-    parser.add_argument("--valid-file", default="data/valid.jsonl")
+    parser.add_argument("--train-file", default="data/smoltalk/train.jsonl")
+    parser.add_argument("--valid-file", default="data/smoltalk/valid.jsonl")
     args = parser.parse_args()
 
     with open(args.config, encoding="utf-8") as f:
