@@ -5,3 +5,7 @@ outputs/
 wandb/
 .cache/
 data/train/
+
+data/smoltalk/
+data/train/
+data/valid/
