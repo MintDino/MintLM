@@ -37,6 +37,12 @@ def main():
         default=None,
         help="Optional session limit. -1 means finish the configured epoch(s).",
     )
+    parser.add_argument(
+        "--max-train-samples",
+        type=int,
+        default=None,
+        help="Optional cap on training examples, useful for a quick smoke test.",
+    )
     args = parser.parse_args()
 
     with open(args.config, encoding="utf-8") as f:
@@ -99,7 +105,12 @@ def main():
             )
         }
 
-    train_ds = raw["train"].map(
+    train_raw = raw["train"]
+    if args.max_train_samples is not None and args.max_train_samples > 0:
+        train_raw = train_raw.select(range(min(args.max_train_samples, len(train_raw))))
+        print(f"Smoke-test sample limit: {len(train_raw):,} training examples")
+
+    train_ds = train_raw.map(
         format_row,
         remove_columns=raw["train"].column_names,
         desc="Formatting training conversations",
