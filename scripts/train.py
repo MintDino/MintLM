@@ -1,3 +1,4 @@
+import unsloth
 import argparse
 import os
 from pathlib import Path
@@ -8,6 +9,14 @@ from datasets import load_dataset
 from transformers.trainer_utils import get_last_checkpoint
 from unsloth import FastLanguageModel
 from trl import SFTConfig, SFTTrainer
+
+
+QWEN_CHAT_TEMPLATE = (
+    "{% for message in messages %}"
+    "{{ '<|im_start|>' + message['role'] + '\\n' + message['content'] + '<|im_end|>' }}"
+    "{% endfor %}"
+    "{% if add_generation_prompt %}{{ '<|im_start|>assistant\\n' }}{% endif %}"
+)
 
 
 def main():
@@ -49,6 +58,10 @@ def main():
         load_in_4bit=cfg["load_in_4bit"],
         dtype=None,
     )
+
+    if not tokenizer.chat_template:
+        print("Tokenizer has no chat template; applying the standard Qwen3 conversation format.")
+        tokenizer.chat_template = QWEN_CHAT_TEMPLATE
 
     model = FastLanguageModel.get_peft_model(
         model,
