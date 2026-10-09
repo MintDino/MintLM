@@ -10,6 +10,10 @@ MintLM is a QLoRA fine-tuning project for building a custom assistant on top of 
 - Accelerator: Unsloth
 - Dataset: Hugging Face `HuggingFaceTB/smoltalk`
 
+## Google Colab training
+
+A step-by-step Colab setup for the Tesla T4, with conservative VRAM settings, Google Drive persistence, automatic checkpoint resume, and a short smoke test is in [`colab/README.md`](colab/README.md).
+
 ## Dataset
 
 MintLM uses the **complete SmolTalk dataset**, not the tiny starter dataset.
