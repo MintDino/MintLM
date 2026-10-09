@@ -28,12 +28,7 @@ OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 ### Cell 2 — Clone or update the repository
 
 ```python
-import os
-if not REPO_DIR.exists():
-    !git clone https://github.com/MintDino/MintLM.git /content/MintLM
-else:
-    %cd /content/MintLM
-    !git pull
+!if [ -d /content/MintLM/.git ]; then git -C /content/MintLM pull; else git clone https://github.com/MintDino/MintLM.git /content/MintLM; fi
 %cd /content/MintLM
 ```
 
